@@ -1,0 +1,63 @@
+{
+    "name": "haeley-examples",
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Examples showcasing the features of the haeley real-time rendering framework.",
+    "author": "halb3",
+    "main": "dist/haeley-examples.umd.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        "import": "./dist/haeley-examples.es.js",
+        "require": "./dist/haeley-examples.umd.js"
+    },
+    "module": "dist/haeley-examples.es.js",
+    "files": [
+        "dist/*",
+        "source/**/*.ts"
+    ],
+    "bugs": {
+        "email": "cgdaniel@outlook.com",
+        "url": "https://github.com/halb3/haeley-examples/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/halb3/haeley-examples.git"
+    },
+    "maintainers": [
+        {
+            "name": "Bastian König",
+            "email": "ba.koe96@gmail.com"
+        }
+    ],
+    "workspaces": [
+        "react",
+        "vue"
+    ],
+    "devDependencies": {
+        "@types/git-rev-sync": "^2.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.8.0",
+        "@typescript-eslint/parser": "^5.8.0",
+        "eslint": "^8.5.0",
+        "git-rev-sync": "^3.0.1",
+        "rimraf": "^3.0.2",
+        "ts-loader": "^9.2.6",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.4",
+        "vite": "^2.7.6"
+    },
+    "scripts": {
+        "build": "vite build && tsc --emitDeclarationOnly",
+        "build:dev": "vite dev",
+        "lint": "eslint source",
+        "postversion": "git push && git push --tags",
+        "prepack": "npm run preversion",
+        "preversion": "npm install && npm run build"
+    },
+    "keywords": [
+        "haeley",
+        "multiframe",
+        "progressive",
+        "computer graphics",
+        "real-time"
+    ]
+}
