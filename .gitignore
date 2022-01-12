@@ -6,4 +6,4 @@ package-lock.json
 .nyc_output
 dist
 test-results
-haeley-colors-*.tgz
+haeley-examples-*.tgz
