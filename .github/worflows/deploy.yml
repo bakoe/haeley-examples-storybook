@@ -1,0 +1,38 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install NPM dependencies
+        run: npm install
+
+      - name: Build static examples
+        run: npm run build
+
+      - name: Build Storybook examples
+        run: npm run build-storybook
+
+      - name: Copy built Storybook to /dist/storybook/
+        run: cp -r react-storybook/storybook-static/ dist/storybook-static/
+
+      - name: Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+          branch: gh-pages
+          folder: dist
