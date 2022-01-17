@@ -36,6 +36,8 @@
     "scripts": {
         "build": "vite build && tsc --emitDeclarationOnly",
         "build:dev": "vite dev",
+        "storybook": "npm run storybook --workspace=react-storybook",
+        "build-storybook": "npm run build-storybook --workspace=react-storybook",
         "lint": "eslint source",
         "postversion": "git push && git push --tags",
         "prepack": "npm run preversion",
