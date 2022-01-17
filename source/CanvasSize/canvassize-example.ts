@@ -9,7 +9,7 @@ import {
     Shader,
     Renderer,
     Wizard,
-} from 'haeley-full';
+} from 'webgl-operate';
 
 import { Example } from '../example';
 

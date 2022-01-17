@@ -9,7 +9,7 @@ import {
     LoadingStatus,
     Renderer,
     viewer,
-} from 'haeley-full';
+} from 'webgl-operate';
 
 /* spellchecker: enable */
 
