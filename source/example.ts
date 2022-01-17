@@ -3,6 +3,8 @@
 
 import {
     Canvas,
+    Context,
+    Controller,
     Initializable,
     LoadingStatus,
     Renderer,
@@ -10,6 +12,16 @@ import {
 } from 'haeley-full';
 
 /* spellchecker: enable */
+
+declare global {
+    interface Window { 
+        canvas: Canvas; 
+        context: Context; 
+        controller: 
+        Controller; 
+        renderer: Renderer 
+    }
+}
 
 
 export abstract class Example extends Initializable {
@@ -38,11 +50,11 @@ export abstract class Example extends Initializable {
 
     protected expose(): void {
 
-        (window as any)['canvas'] = this.canvas;
-        (window as any)['context'] = this.canvas.context;
-        (window as any)['controller'] = this.canvas.controller;
+        window['canvas'] = this.canvas;
+        window['context'] = this.canvas.context;
+        window['controller'] = this.canvas.controller;
 
-        (window as any)['renderer'] = this.renderer;
+        window['renderer'] = this.renderer;
     }
 
     initialize(element: HTMLCanvasElement | string, spinnerElement?: HTMLDivElement): boolean {

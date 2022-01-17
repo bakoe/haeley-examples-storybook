@@ -3,15 +3,12 @@
 
 import {
     Canvas,
-    Context,
     DefaultFramebuffer,
-    Invalidate,
     NdcFillingTriangle,
     Program,
     Shader,
     Renderer,
     Wizard,
-    ChangeLookup,
 } from 'haeley-full';
 
 import { Example } from '../example';
@@ -22,21 +19,6 @@ import { Example } from '../example';
 
 
 class CanvasSizeRenderer extends Renderer {
-
-    // /**
-    //  * Alterable auxiliary object for tracking changes on this object's input and lazy updates.
-    //  */
-    //  protected readonly _altered = Object.assign(new ChangeLookup(), {
-    //     any: false,
-    //     multiFrameNumber: false,
-    //     frameSize: false,
-    //     canvasSize: false,
-    //     framePrecision: false,
-    //     clearColor: false,
-    //     debugTexture: false,
-
-    //     cellWidth: false,
-    // });
 
     protected static readonly SHADER_SOURCE_VERT: string =
         `precision lowp float;
@@ -104,8 +86,11 @@ void main(void)
      * @param mouseEventProvider - required for mouse interaction
      * @returns - whether initialization was successful
      */
-    protected onInitialize(context: Context, callback: Invalidate,
-        /* eventProvider: EventProvider */): boolean {
+    protected onInitialize(
+        // context: Context, 
+        // callback: Invalidate,
+        // eventProvider: EventProvider
+    ): boolean {
 
         /* Create framebuffers, textures, and render buffers. */
 
@@ -214,7 +199,6 @@ void main(void)
 
     set cellWidth(cellWidth: number) {
         this._cellWidth = cellWidth;
-        // this._altered.alter('cellWidth');
         this.invalidate(true);
     }
 
