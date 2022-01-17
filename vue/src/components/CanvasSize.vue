@@ -1,6 +1,6 @@
 <script lang="ts">
 // import { ref, onMounted } from "vue";
-import { CanvasSizeExample } from "./CanvasSize/canvassize-example";
+import { CanvasSizeExample } from "../../../source/CanvasSize/canvassize-example";
 
 // let example = undefined as CanvasSizeExample | undefined;
 

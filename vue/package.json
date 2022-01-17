@@ -10,7 +10,6 @@
         "build-storybook": "build-storybook"
     },
     "dependencies": {
-        "haeley-full": "file:../../haeley-full/",
         "vue": "^3.2.25"
     },
     "devDependencies": {

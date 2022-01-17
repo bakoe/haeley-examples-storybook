@@ -10,7 +10,7 @@
         "build-storybook": "build-storybook"
     },
     "dependencies": {
-        "haeley-full": "file:../../../haeley-full",
+        "haeley-full": "file:../../haeley-full/",
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
     },
