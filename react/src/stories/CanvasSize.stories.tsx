@@ -9,14 +9,9 @@ export default {
   component: CanvasSize,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-      cellWidthDenominator: {
-          control: "range",
-      }
-    // cellWidthDenominator: {
-    //     type: "number",
-    // }
-    // cellWidthDenominator: { control: 'number' },
-    // backgroundColor: { control: 'color' },
+    cellWidthDenominator: {
+      control: "range",
+    },
   },
 } as ComponentMeta<typeof CanvasSize>;
 
@@ -31,20 +26,3 @@ Default.args = {
   // example: new CanvasSizeExample(),
   cellWidthDenominator: 64.0,
 };
-
-// export const Secondary = Template.bind({});
-// Secondary.args = {
-//   label: 'Button',
-// };
-
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Button',
-// };
-
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Button',
-// };
