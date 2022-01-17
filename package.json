@@ -23,7 +23,8 @@
         "react-storybook"
     ],
     "dependencies": {
-        "webgl-operate": "^0.7.5"
+        "webgl-operate": "^0.7.5",
+        "rxjs": "~6.6.6" 
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.8.0",
