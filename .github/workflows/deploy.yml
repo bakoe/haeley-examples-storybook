@@ -25,11 +25,16 @@ jobs:
       - name: Build static examples
         run: npm run build
 
-      # - name: Build Storybook examples
-      #   run: npm run build-storybook
+      - name: Install NPM dependencies of Storybook workspace
+        run: npm install
+        working-directory: react-storybook
 
-      # - name: Copy built Storybook to /dist/storybook/
-      #   run: cp -r react-storybook/storybook-static/ dist/storybook-static/
+      - name: Build Storybook examples
+        run: npm run build-storybook
+        working-directory: react-storybook
+
+      - name: Copy built Storybook to /dist/storybook/
+        run: cp -r react-storybook/storybook-static/ dist/storybook-static/
 
       - name: Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@v4.2.2
