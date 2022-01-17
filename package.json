@@ -30,8 +30,7 @@
         }
     ],
     "workspaces": [
-        "react",
-        "vue"
+        "react"
     ],
     "dependencies": {
         "haeley-full": "file:../haeley-full/"
