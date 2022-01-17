@@ -11,6 +11,7 @@ import {
     Shader,
     Renderer,
     Wizard,
+    ChangeLookup,
 } from 'haeley-full';
 
 import { Example } from '../example';
@@ -21,6 +22,21 @@ import { Example } from '../example';
 
 
 class CanvasSizeRenderer extends Renderer {
+
+    // /**
+    //  * Alterable auxiliary object for tracking changes on this object's input and lazy updates.
+    //  */
+    //  protected readonly _altered = Object.assign(new ChangeLookup(), {
+    //     any: false,
+    //     multiFrameNumber: false,
+    //     frameSize: false,
+    //     canvasSize: false,
+    //     framePrecision: false,
+    //     clearColor: false,
+    //     debugTexture: false,
+
+    //     cellWidth: false,
+    // });
 
     protected static readonly SHADER_SOURCE_VERT: string =
         `precision lowp float;
@@ -53,7 +69,7 @@ void main(void)
 
 varying vec2 v_uv;
 
-const float CELL_WIDTH = 1.0 / 64.0;
+uniform float u_cellWidth;
 
 void main(void)
 {
@@ -63,7 +79,7 @@ void main(void)
     vec3 x = step(mod(x3, vec3(3.0)), vec3(1.0));
     vec3 y = step(mod(y3, vec3(3.0)), vec3(1.0));
 
-    float cell = step(mod(gl_FragCoord.x * CELL_WIDTH + floor(gl_FragCoord.y * CELL_WIDTH), 2.0), 1.0);
+    float cell = step(mod(gl_FragCoord.x * u_cellWidth + floor(gl_FragCoord.y * u_cellWidth), 2.0), 1.0);
     fragColor = vec4(mix(x, y, cell), 1.0);
 }
 `;
@@ -76,6 +92,9 @@ void main(void)
     protected _ndcTriangle: NdcFillingTriangle;
 
     protected _program: Program;
+
+    protected _cellWidth: number;
+    protected _uCellWidth: WebGLUniformLocation;
 
 
     /**
@@ -111,6 +130,9 @@ void main(void)
 
         this._program.attribute('a_vertex', this._ndcTriangle.vertexLocation);
         this._program.link();
+
+        this._cellWidth = 1.0 / 64.0;
+        this._uCellWidth = this._program.uniform('u_cellWidth');
 
         this.finishLoading();
 
@@ -178,10 +200,22 @@ void main(void)
 
         this._program.bind();
 
+        gl.uniform1f(this._uCellWidth, this.cellWidth);
+
         this._ndcTriangle.bind();
         this._ndcTriangle.draw();
         this._ndcTriangle.unbind();
 
+    }
+
+    get cellWidth(): number {
+        return this._cellWidth;
+    }
+
+    set cellWidth(cellWidth: number) {
+        this._cellWidth = cellWidth;
+        // this._altered.alter('cellWidth');
+        this.invalidate(true);
     }
 
 }
@@ -216,6 +250,10 @@ export class CanvasSizeExample extends Example {
 
     get renderer(): CanvasSizeRenderer {
         return this._renderer;
+    }
+
+    set cellWidth(cellWidth: number) {
+        this._renderer.cellWidth = cellWidth;
     }
 
 }

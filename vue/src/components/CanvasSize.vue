@@ -1,35 +1,113 @@
 <script lang="ts">
-import { ref, onMounted } from "vue";
+// import { ref, onMounted } from "vue";
 import { CanvasSizeExample } from "./CanvasSize/canvassize-example";
 
+// let example = undefined as CanvasSizeExample | undefined;
+
 export default {
-  setup() {
-    const canvas = ref(null);
-    const glspinner = ref(null);
-
-    onMounted(() => {
-      if (canvas && glspinner) {
-        const element = canvas.value;
-        const spinnerElement = glspinner.value;
-
-        const example = new CanvasSizeExample();
-        if (element) {
-          example.initialize(element, spinnerElement || undefined);
-          example.enableFullscreenOnCtrlClick();
-        }
-      }
-    });
-
+  data() {
     return {
-      canvas,
-      glspinner
+      example: undefined as CanvasSizeExample | undefined,
     };
   },
+  props: {
+    cellWidthDenominator: Number,
+    canvasref: HTMLCanvasElement,
+    glspinnerref: HTMLDivElement,
+  },
+  watch: {
+    cellWidthDenominator: {
+      immediate: true,
+      handler(newValue) {
+        if (this.example) {
+          this.example.cellWidth = 1.0 / newValue;
+        }
+      },
+    },
+  },
+  beforeUnmount() {
+    console.log("unmounting now …");
+    console.log(this.example);
+  },
+  unmounted() {
+    console.log("unmounted now …");
+    console.log(this.example);
+  },
+  beforeUpdate() {
+    console.log("beforeUpdate");
+    console.log(this.example);
+  },
+  beforeMount() {
+    console.log("beforeMount");
+    console.log(this.example);
+  },
+  mounted() {
+    console.log("mounted");
+    console.log(this.example);
+  },
+  updated() {
+    // const glspinner = this.$refs.glspinner;
+    const glspinner = this.glspinnerref;
+    const canvasref = this.canvasref;
+    console.log(glspinner);
+    console.log(canvasref);
+
+    if (canvasref && glspinner) {
+      if (!this.example) {
+        console.log("Creating new example");
+
+        const exampleInstance = new CanvasSizeExample();
+        exampleInstance.initialize(canvasref, glspinner || undefined);
+        exampleInstance.enableFullscreenOnCtrlClick();
+
+        exampleInstance.cellWidth = 1.0 / this.$props.cellWidthDenominator;
+
+        this.example = Object.assign({}, this.example, exampleInstance);
+
+        console.log(this.example);
+      }
+    }
+  },
+  // setup(props) {
+  //   const canvas = ref(null);
+  //   const glspinner = ref(null);
+
+  //   console.log(props.canvasref);
+
+  //   // console.log((this as any).$parent.$refs.canvasref);
+
+  //   onMounted(() => {
+  //     console.log("onMounted");
+  //     console.log(props.canvasref);
+  //     // console.log((this as any).$parent.$refs.canvasref);
+  //     // if (canvas && glspinner) {
+  //     if (glspinner) {
+  //       // const element = canvas.value;
+  //       const element = props.canvasref;
+  //       const spinnerElement = glspinner.value;
+
+  //       if (!example) {
+  //         example = new CanvasSizeExample();
+  //         if (element) {
+  //           example.initialize(element, spinnerElement || undefined);
+  //           example.enableFullscreenOnCtrlClick();
+  //         }
+  //       }
+  //     }
+  //   });
+
+  // return {
+  //   canvas,
+  //   glspinner,
+  // };
+  // },
 };
 </script>
 
 <template>
   <div>
+    <!-- <h1>{{ canvasref }}</h1>
+
     <canvas ref="canvas" />
 
     <div ref="glspinner" class="glspinner">
@@ -37,7 +115,7 @@ export default {
       <div></div>
       <div></div>
       <div></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
