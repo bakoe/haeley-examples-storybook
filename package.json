@@ -20,7 +20,7 @@
         }
     ],
     "workspaces": [
-        "react"
+        "react-storybook"
     ],
     "dependencies": {
         "haeley-full": "file:../haeley-full/"
