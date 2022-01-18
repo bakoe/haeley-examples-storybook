@@ -19,4 +19,11 @@ module.exports = {
     config.output.publicPath = '/haeley-examples-storybook/storybook-static/';
     return config;
   },
+  async viteFinal(config) {
+    return {
+      ...config,
+      // base: './'
+      base: '/haeley-examples-storybook/storybook-static/'
+    }
+  }
 }
