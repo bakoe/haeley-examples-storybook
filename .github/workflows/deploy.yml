@@ -29,12 +29,12 @@ jobs:
         run: npm install
         working-directory: react-storybook
 
-      - name: Build Storybook examples
-        run: npm run build-storybook
+      - name: Build Storybook examples into dist folder in root
+        run: npm run build-storybook -- -o ../dist/storybook-static
         working-directory: react-storybook
 
-      - name: Copy built Storybook to /dist/storybook/
-        run: cp -r react-storybook/storybook-static/ dist/storybook-static/
+      # - name: Copy built Storybook to /dist/storybook/
+      #   run: cp -r react-storybook/storybook-static/ dist/storybook-static/
 
       - name: Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@v4.2.2

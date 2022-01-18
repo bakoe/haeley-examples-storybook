@@ -10,5 +10,13 @@ module.exports = {
   "framework": "@storybook/react",
   "core": {
     "builder": "storybook-builder-vite"
-  }
+  },
+  webpackFinal: async (config, { configType }) => {
+    config.output.publicPath = '/haeley-examples-storybook/storybook-static/';
+    return config;
+  },
+  managerWebpack: async (config) => {
+    config.output.publicPath = '/haeley-examples-storybook/storybook-static/';
+    return config;
+  },
 }
